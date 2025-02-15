@@ -1,20 +1,18 @@
 <template>
-  <div class="fixed-grid has-1-cols-mobile has-3-cols-tablet">
-    <div class="grid">
-      <div class="cell">
-        <p class="title is-4">Termine</p>
-        <TourDates />
-      </div>
-      <div class="cell">
-        <p class="title is-4">Social Media</p>
-        <SocialMedia />
-      </div>
-      <div class="cell">
-        <p class="title is-4">Spotify</p>
-        <SpotifyIntegration />
-      </div>
-    </div>
-  </div>
+	<div class="columns">
+		<div class="column is-12-mobile is-4-tablet">
+			<p class="title is-4">Termine</p>
+			<TourDates />
+		</div>
+		<div class="column is-12-mobile is-4-tablet">
+			<p class="title is-4">Social Media</p>
+			<SocialMedia />
+		</div>
+		<div class="column is-12-mobile is-4-tablet">
+			<p class="title is-4">Spotify</p>
+			<SpotifyIntegration />
+		</div>
+	</div>
 </template>
 
 <script>

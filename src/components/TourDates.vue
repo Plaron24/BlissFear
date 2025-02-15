@@ -1,28 +1,68 @@
 <template>
   <table class="table is-striped is-hoverable is-fullwidth">	
     <tr>
-      <th>Wann?</th>
-      <th>Wo?</th>
+      <th>Datum</th>
+      <th>Stadt</th>
+      <th>Location</th>
       <th>Anreise</th>
     </tr>
-    <tr v-for="(date, index) in data" :key="index">
-      <td>{{ date.wann }}</td>
-      <td>{{ date.wo }}</td>
-      <td><a :href="date.anreise" target="_blank">Google Maps</a></td>
+    <tr v-for="(event, index) in events" :key="index">
+      <td>{{ event.date }}</td>
+      <td>{{ event.city }}</td>
+      <td>{{ event.location }}</td>
+      <td><a :href="event.mapsLink" target="_blank">Google Maps</a></td>
     </tr>
   </table>
 </template>
 
 <script>
 export default {
-  name: 'TourDates',
+  name: "TourDates",
   data() {
     return {
-      data: [
-        { wann: '2025-03-01', wo: 'Berlin', anreise: 'https://maps.app.goo.gl/scKeddx8uW1KZEBY8' },
-        { wann: '2025-03-15', wo: 'Hamburg', anreise: 'https://maps.app.goo.gl/1VcSZitGHFNdyuNP6' },
-      ]
-    }
-  }
-}
+      events: [],
+    };
+  },
+  mounted() {
+    this.loadCSV();
+  },
+  methods: {
+	getDateString(date) {
+		const hasTime = date.length > 10 ? true : false;
+		if (hasTime) {
+			return new Date(date.trim()).toLocaleString(navigator.language, { 
+				day: "2-digit", 
+				month: "2-digit", 
+				year: "numeric", 
+				hour: "2-digit", 
+				minute: "2-digit"
+			}) + ' Uhr';
+		}
+		return new Date(date.trim()).toLocaleString(navigator.language, { 
+				day: "2-digit", 
+				month: "2-digit", 
+				year: "numeric"
+			});
+	},
+    async loadCSV() {
+      try {
+        const response = await fetch("/data/events.csv");
+        const text = await response.text();
+        const rows = text.split("\n").slice(1);
+
+        this.events = rows.map((row) => {
+          const [date, city, location, mapsLink] = row.split(",");
+          return {
+            date: date ? this.getDateString(date.trim()) : "",
+            city: city ? city.trim() : "",
+            location: location ? location.trim() : "",
+            mapsLink: mapsLink ? mapsLink.trim() : "",
+          };
+        });
+      } catch (error) {
+        console.error("Fehler beim Laden der CSV:", error);
+      }
+    },
+  },
+};
 </script>
