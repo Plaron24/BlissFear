@@ -1,50 +1,40 @@
 <template>
-  <div id="app">
+  <div id="app" class="flex flex-col min-h-screen">
     <HeaderComponent />
     <NavigationBar />
-    <main>
-      <HomeView />
-      <!--WelcomeBanner />
-      <About />
-      <Music />
-      <TourDates />
-      <Gallery /-->
+    <main class="flex-grow">
+      <router-view></router-view>
     </main>
+    <FooterComponent />
   </div>
 </template>
 
 <script>
 import 'bulma/css/bulma.css';
-import HeaderComponent from './components/HeaderComponent.vue'
-import NavigationBar from './components/NavigationBar.vue'
-import HomeView from './views/HomeView.vue'
-/*import WelcomeBanner from './components/WelcomeBanner.vue'
-import About from './components/About.vue'
-import Music from './components/Music.vue'
-import TourDates from './components/TourDates.vue'
-import Gallery from './components/Gallery.vue'
-*/
+import HeaderComponent from './components/HeaderComponent.vue';
+import NavigationBar from './components/NavigationBar.vue';
+import FooterComponent from './components/FooterComponent.vue';
+
 export default {
   name: 'App',
   components: {
     HeaderComponent,
     NavigationBar,
-    HomeView/*,
-    WelcomeBanner,
-    About,
-    Music,
-    TourDates,
-    Gallery*/
-  }
-}
+    FooterComponent,
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Arial, sans-serif;
-  color: #333;
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
+
 main {
+  flex-grow: 1;
   padding: 20px;
 }
 </style>

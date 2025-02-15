@@ -13,6 +13,7 @@
       <td><a :href="event.mapsLink" target="_blank">Google Maps</a></td>
     </tr>
   </table>
+  <p class="text-white is-5">Möchtest du dein Event in der Liste ergänzen? Kontaktiere uns <a href="mailto:bewerbung@blissfear.com">hier</a></p>
 </template>
 
 <script>
@@ -66,3 +67,9 @@ export default {
   },
 };
 </script>
+
+<style>
+	.text-white {
+		color: white;
+	}
+</style>
