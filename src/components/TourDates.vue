@@ -46,7 +46,7 @@ export default {
 	},
     async loadCSV() {
       try {
-        const response = await fetch("/data/events.csv");
+        const response = await fetch(`${process.env.BASE_URL}/data/events.csv`);
         const text = await response.text();
         const rows = text.split("\n").slice(1);
 
